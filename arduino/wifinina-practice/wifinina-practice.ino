@@ -95,27 +95,9 @@ void setup() {
 
 void loop() {
 
-  // 서버 데이터가 저장될 변수 선언
-  String serverData = receiveServerData();
-  
-  // 서버에서 수신한 데이터를 전부 받았으면 실행
-  if (serverData != NULL) {
-    // 서버 데이터(JSON)를 아두이노에서 원하는 형태로 파싱하여 받아온다.
-    json = getParsedJSON(serverData);
-
-    // 수신 데이터를 파싱하여 각 변수에 저장
-    const char* sensor = json["sensor"];
-    double distance = json["distance"];
-    double latitude = json["data"][0];
-
-    // 출력
-    Serial.println();
-    Serial.println(sensor);
-    Serial.println(distance, 1);
-    Serial.println(latitude, 5);
-
-    client.stop();
-  }
+  // 서버 데이터 처리
+  String serverData = receiveServerData(); // 서버 데이터가 저장될 변수 선언
+  processData(serverData);                 // 서버 데이터 처리
 
   // 서버 연결이 끊어지면 클라이언트 중지
   if (!client.connected()) {
@@ -127,6 +109,8 @@ void loop() {
     while (true);
   }
 }
+
+/* ************************************************************************************ */
 
 /*
  @ receiveData : 서버가 전달한 데이터를 반환해주는 함수
@@ -156,9 +140,36 @@ String receiveServerData() {
 }
 
 /*
+ @ receiveData : 서버가 전달한 데이터를 반환해주는 함수
+ @ 파라미터
+ @ serverData : 문자열 : 서버가 전달한 데이터
+*/
+void processData(String serverData) {
+
+  // 서버에서 수신한 데이터를 전부 받았으면 실행
+  if (serverData != NULL) {
+    // 서버 데이터(JSON)를 아두이노에서 원하는 형태로 파싱하여 받아온다.
+    json = getParsedJSON(serverData);
+
+    // 수신 데이터를 파싱하여 각 변수에 저장
+    const char* sensor = json["sensor"];
+    double distance = json["distance"];
+    double latitude = json["data"][0];
+
+    // 출력
+    Serial.println();
+    Serial.println(sensor);
+    Serial.println(distance, 1);
+    Serial.println(latitude, 5);
+
+    client.stop();
+  }
+}
+
+/*
  @ getParsedJSON : JSON 객체 반환 함수
  @ 파라미터
- @ serverData :: JSON 객체로 변환할 문자열
+ @ serverData : 문자열 : JSON 객체로 변환할 데이터
 
  @ 반환 타입 : JSON
 */
