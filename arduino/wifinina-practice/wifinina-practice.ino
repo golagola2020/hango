@@ -98,7 +98,6 @@ void loop() {
   // 서버 데이터 처리
   String serverData = receiveServerData(); // 서버 데이터가 저장될 변수 선언
   processData(serverData);                 // 서버 데이터 처리
-  
 
   // 서버 연결이 끊어지면 클라이언트 중지
   if (!client.connected()) {
