@@ -98,7 +98,7 @@ void loop() {
   // 서버 데이터가 저장될 변수 선언
   String serverData = receiveServerData();
   
-  // 서버에서 수신한 데이터를 전부 받았으면 실행
+  // 서버에서 수신한 데이터를 전부 받았으면 실행asd
   if (serverData != NULL) {
     // 서버 데이터(JSON)를 아두이노에서 원하는 형태로 파싱하여 받아온다.
     json = getParsedJSON(serverData);
