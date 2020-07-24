@@ -4,7 +4,7 @@
 #include "arduino-secrets.h" // 정보관리와 보안유지를 위해 따로 관리함.
 
 #include <ArduinoJson.h> // JSON 통신을 위한 헤더 포함
-
+//sdfsdf
 // 네트워크 통신에 사용될 기본 변수 선언
 char ssid[] = SECRET_SSID; // 네트워크에 연결할 IP 도메인 (Service Set ID)
 char pass[] = SECRET_PASS; // 네트워크에 연결할 IP 패스워드
