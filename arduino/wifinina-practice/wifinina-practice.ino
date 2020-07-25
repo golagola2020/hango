@@ -11,6 +11,8 @@ char pass[] = SECRET_PASS; // 네트워크에 연결할 IP 패스워드
 
 // JSON 객체 선언 (동적 메모리 할당, 정적 메모리 할당하고자 할 경우 Dynamic => Static 변경)
 DynamicJsonDocument json(200);
+String lastConnectionTime;
+boolean isConnected;
 
 /*
   @ [WiFi 상태 상수]
@@ -64,7 +66,7 @@ void loop() {
   // 서버 연결이 끊어지면 클라이언트 중지
   if (!client.connected()) {
     Serial.println();
-    Serial.println("서버와의 연결이 끊어습니다...");
+    Serial.println("서버와의 연결이 끊어졌습니다...");
     client.stop();
 
     // 더 이상 아무것도 하지 않는다.
@@ -73,39 +75,6 @@ void loop() {
 }
 
 /* ************************************************************************************ */
-
-/*
- @ setWiFi : WiFi 초기 설정 함수
- @ 파라미터 없음
-*/
-void setWifi() {
-  
-  // WiFi 모듈 확인
-  if (WiFi.status() == WL_NO_MODULE) {
-    Serial.println("WiFi 모듈과의 통신 실패!");
-    
-    // 계속하지 않는다.
-    while(true);
-  }
-
-  // 모듈 펌웨어 버젼 확인
-  String fv = WiFi.firmwareVersion();
-  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
-    Serial.println("펌웨어를 업그레이드하십시오.");
-  }
-
-  // WiFi 네트워크 연결 시도
-  while(status != WL_CONNECTED) {
-    Serial.print("SSID 연결 시도 중 : ");
-    Serial.println(ssid);
-
-    // WPA/WPA2 네트워크에 연결. 개방형 또는 WEP 네트워크를 사용하는 경우 아래 라인 변경.
-    status = WiFi.begin(ssid, pass);
-
-    // 연결을 5초 동안 대기
-    delay(5000);
-  }
-}
 
 /*
  @ requestJsonFromServer : 서버에게 JSON 데이터를 요청하는 함수
@@ -120,21 +89,22 @@ void requestJsonToServer() {
   json["serialNumber"] = "00000001";
   serializeJson(json, jsonData);
   Serial.println(jsonData);
+  Serial.println(jsonData.length());
 
   // 연결이 되면 serial을 통해 결과 출력
   if (client.connect(SERVER_IP, PORT)) {
     Serial.println("서버에 연결되었습니다.");
     
     // HTTP 요청
-    client.println("POST /arduino HTTP/1.1");         // 요청 메소드와 경로, 통신 프로토콜 정의한다.
+    client.println("POST /arduino/" + jsonData + "/ HTTP/1.1");         // 요청 메소드와 경로, 통신 프로토콜 정의한다.
     client.println("Cache-Control: no-cache");
     client.print("Host: ");
     client.println(SERVER_HOST);                      // 호스트로 서버의 호스트를 정의한다.
-    client.println("User-Agent: Arduino");            // 요청한 에이전트
+    client.println("User-Agent: ArduinoWiFi/1.1");    // 요청한 에이전트
     client.print("Content-Type: application/json");   // 데이터 전송 유형 (JSON 형식)
-//    client.println("Connection: close");            // 데이터를 요청만하고 종료하고자 할 경우 사용
     client.print("Content-Length: ");
     client.println(jsonData.length());
+    client.println("Connection: keep-alive");          
     client.println();
     client.println(jsonData);
 
@@ -192,8 +162,6 @@ void processData(String serverData) {
     Serial.println(sensor);
     Serial.println(distance, 1);
     Serial.println(latitude, 5);
-
-    client.stop();
   }
 }
 
@@ -217,6 +185,39 @@ DynamicJsonDocument getParsedJSON(String serverData) {
 
   // JSON 객체 반환
   return json;
+}
+
+/*
+ @ setWiFi : WiFi 초기 설정 함수
+ @ 파라미터 없음
+*/
+void setWifi() {
+  
+  // WiFi 모듈 확인
+  if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("WiFi 모듈과의 통신 실패!");
+    
+    // 계속하지 않는다.
+    while(true);
+  }
+
+  // 모듈 펌웨어 버젼 확인
+  String fv = WiFi.firmwareVersion();
+  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
+    Serial.println("펌웨어를 업그레이드하십시오.");
+  }
+
+  // WiFi 네트워크 연결 시도
+  while(status != WL_CONNECTED) {
+    Serial.print("SSID 연결 시도 중 : ");
+    Serial.println(ssid);
+
+    // WPA/WPA2 네트워크에 연결. 개방형 또는 WEP 네트워크를 사용하는 경우 아래 라인 변경.
+    status = WiFi.begin(ssid, pass);
+
+    // 연결을 5초 동안 대기
+    delay(5000);
+  }
 }
 
 /*
