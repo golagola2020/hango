@@ -102,8 +102,8 @@ void setWifi() {
     // WPA/WPA2 네트워크에 연결. 개방형 또는 WEP 네트워크를 사용하는 경우 아래 라인 변경.
     status = WiFi.begin(ssid, pass);
 
-    // 연결을 10초 동안 대기
-    delay(10000);
+    // 연결을 5초 동안 대기
+    delay(5000);
   }
 }
 
@@ -115,21 +115,21 @@ void requestJsonToServer() {
   
   Serial.println("\n서버와 연결 중...");  
 
+  String jsonData = "";
+  json["managerID"] = "parkwoorim";
+  json["serialNumber"] = "00000001";
+  serializeJson(json, jsonData);
+  Serial.println(jsonData);
+
   // 연결이 되면 serial을 통해 결과 출력
   if (client.connect(SERVER_IP, PORT)) {
     Serial.println("서버에 연결되었습니다.");
-
-    String jsonData = "";
-    json["managerID"] = "parkwoorim";
-    json["serialNumber"] = "00000001";
-    serializeJson(json, jsonData);
-    Serial.println(jsonData);
     
     // HTTP 요청
     client.println("POST /arduino HTTP/1.1");         // 요청 메소드와 경로, 통신 프로토콜 정의한다.
     client.println("Cache-Control: no-cache");
     client.print("Host: ");
-    client.println(SERVER_HOST);                      //  호스트로 서버의 호스트를 정의한다.
+    client.println(SERVER_HOST);                      // 호스트로 서버의 호스트를 정의한다.
     client.println("User-Agent: Arduino");            // 요청한 에이전트
     client.print("Content-Type: application/json");   // 데이터 전송 유형 (JSON 형식)
 //    client.println("Connection: close");            // 데이터를 요청만하고 종료하고자 할 경우 사용
