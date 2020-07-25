@@ -68,27 +68,12 @@ void setup() {
     delay(10000);
   }
 
+  //  WiFi 상태 출력
   Serial.println("WiFi에 연결되었습니다.");
   printWifiStatus();
 
-  Serial.println("\n서버와 연결 중...");  
-
-  // 연결이 되면 serial을 통해 결과 출력
-  if (client.connect(SERVER_IP, PORT)) {
-    Serial.println("서버에 연결되었습니다.");
-
-    // HTTP 요청
-    client.println("POST /arduino HTTP/1.1");         // 요청 메소드와 경로, 통신 프로토콜 정의한다.
-    client.println("Cache-Control: no-cache");
-    client.print("Host: ");
-    client.println(SERVER_HOST);                      //  호스트로 서버의 호스트를 정의한다.
-    client.println("User-Agent: Arduino");            // 요청한 에이전트
-    client.print("Content-Type: application/json");   // 데이터 전송 유형 (JSON 형식)
-    client.println("Connection: close");
-
-    // 마지막에 println을 함으로써 서버에게 데이터를 요청한다.
-    client.println();
-  }
+  // 서버에게 JSON 데이터를 요청
+  requestJsonFromServer();
 }
 
 /* ************************************************************************************ */
@@ -111,6 +96,32 @@ void loop() {
 }
 
 /* ************************************************************************************ */
+
+/*
+ @ requestJsonFromServer : 서버에게 JSON 데이터를 요청하는 함수
+ @ 파라미터 없음
+*/
+void requestJsonFromServer() {
+  
+  Serial.println("\n서버와 연결 중...");  
+
+  // 연결이 되면 serial을 통해 결과 출력
+  if (client.connect(SERVER_IP, PORT)) {
+    Serial.println("서버에 연결되었습니다.");
+
+    // HTTP 요청
+    client.println("POST /arduino HTTP/1.1");         // 요청 메소드와 경로, 통신 프로토콜 정의한다.
+    client.println("Cache-Control: no-cache");
+    client.print("Host: ");
+    client.println(SERVER_HOST);                      //  호스트로 서버의 호스트를 정의한다.
+    client.println("User-Agent: Arduino");            // 요청한 에이전트
+    client.print("Content-Type: application/json");   // 데이터 전송 유형 (JSON 형식)
+    client.println("Connection: close");
+
+    // 마지막에 println을 함으로써 서버에게 데이터를 요청한다.
+    client.println();
+  }
+}
 
 /*
  @ receiveData : 서버가 전달한 데이터를 반환해주는 함수
