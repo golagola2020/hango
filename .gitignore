@@ -6,4 +6,6 @@
 
 # sequrity
 **.env
+**secrets.h
+
 
