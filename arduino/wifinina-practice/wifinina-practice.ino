@@ -42,31 +42,8 @@ void setup() {
     // 기본 USB 포트에만 필요.
   }
 
-  // WiFi 모듈 확인
-  if (WiFi.status() == WL_NO_MODULE) {
-    Serial.println("WiFi 모듈과의 통신 실패!");
-    
-    // 계속하지 않는다.
-    while(true);
-  }
-
-  // 모듈 펌웨어 버젼 확인
-  String fv = WiFi.firmwareVersion();
-  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
-    Serial.println("펌웨어를 업그레이드하십시오.");
-  }
-
-  // WiFi 네트워크 연결 시도
-  while(status != WL_CONNECTED) {
-    Serial.print("SSID 연결 시도 중 : ");
-    Serial.println(ssid);
-
-    // WPA/WPA2 네트워크에 연결. 개방형 또는 WEP 네트워크를 사용하는 경우 아래 라인 변경.
-    status = WiFi.begin(ssid, pass);
-
-    // 연결을 10초 동안 대기
-    delay(10000);
-  }
+  // WiFi 설정
+  setWiFi();
 
   //  WiFi 상태 출력
   Serial.println("WiFi에 연결되었습니다.");
@@ -96,6 +73,39 @@ void loop() {
 }
 
 /* ************************************************************************************ */
+
+/*
+ @ setWiFi : WiFi 초기 설정 함수
+ @ 파라미터 없음
+*/
+void setWiFi() {
+  
+  // WiFi 모듈 확인
+  if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("WiFi 모듈과의 통신 실패!");
+    
+    // 계속하지 않는다.
+    while(true);
+  }
+
+  // 모듈 펌웨어 버젼 확인
+  String fv = WiFi.firmwareVersion();
+  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
+    Serial.println("펌웨어를 업그레이드하십시오.");
+  }
+
+  // WiFi 네트워크 연결 시도
+  while(status != WL_CONNECTED) {
+    Serial.print("SSID 연결 시도 중 : ");
+    Serial.println(ssid);
+
+    // WPA/WPA2 네트워크에 연결. 개방형 또는 WEP 네트워크를 사용하는 경우 아래 라인 변경.
+    status = WiFi.begin(ssid, pass);
+
+    // 연결을 10초 동안 대기
+    delay(10000);
+  }
+}
 
 /*
  @ requestJsonFromServer : 서버에게 JSON 데이터를 요청하는 함수
