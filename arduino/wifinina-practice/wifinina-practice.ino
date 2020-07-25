@@ -134,7 +134,7 @@ void requestJsonToServer() {
     client.print("Content-Type: application/json");   // 데이터 전송 유형 (JSON 형식)
 //    client.println("Connection: close");            // 데이터를 요청만하고 종료하고자 할 경우 사용
     client.print("Content-Length: ");
-    client.println(jsonData.length)
+    client.println(jsonData.length());
     client.println();
     client.println(jsonData);
 
