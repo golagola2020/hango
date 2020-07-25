@@ -43,7 +43,7 @@ void setup() {
   }
 
   // WiFi 설정
-  setWiFi();
+  setWifi();
 
   //  WiFi 상태 출력
   Serial.println("WiFi에 연결되었습니다.");
@@ -78,7 +78,7 @@ void loop() {
  @ setWiFi : WiFi 초기 설정 함수
  @ 파라미터 없음
 */
-void setWiFi() {
+void setWifi() {
   
   // WiFi 모듈 확인
   if (WiFi.status() == WL_NO_MODULE) {
