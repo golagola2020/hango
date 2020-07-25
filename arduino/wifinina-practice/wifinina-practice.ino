@@ -50,7 +50,7 @@ void setup() {
   printWifiStatus();
 
   // 서버에게 JSON 데이터를 요청
-  requestJsonFromServer();
+  requestJsonToServer();
 }
 
 /* ************************************************************************************ */
@@ -111,7 +111,7 @@ void setWifi() {
  @ requestJsonFromServer : 서버에게 JSON 데이터를 요청하는 함수
  @ 파라미터 없음
 */
-void requestJsonFromServer() {
+void requestJsonToServer() {
   
   Serial.println("\n서버와 연결 중...");  
 
@@ -119,6 +119,12 @@ void requestJsonFromServer() {
   if (client.connect(SERVER_IP, PORT)) {
     Serial.println("서버에 연결되었습니다.");
 
+    String jsonData = "";
+    json["managerID"] = "parkwoorim";
+    json["serialNumber"] = "00000001";
+    serializeJson(json, jsonData);
+    Serial.println(jsonData);
+    
     // HTTP 요청
     client.println("POST /arduino HTTP/1.1");         // 요청 메소드와 경로, 통신 프로토콜 정의한다.
     client.println("Cache-Control: no-cache");
@@ -126,7 +132,11 @@ void requestJsonFromServer() {
     client.println(SERVER_HOST);                      //  호스트로 서버의 호스트를 정의한다.
     client.println("User-Agent: Arduino");            // 요청한 에이전트
     client.print("Content-Type: application/json");   // 데이터 전송 유형 (JSON 형식)
-    client.println("Connection: close");
+//    client.println("Connection: close");            // 데이터를 요청만하고 종료하고자 할 경우 사용
+    client.print("Content-Length: ");
+    client.println(jsonData.length());
+    client.println();
+    client.println(jsonData);
 
     // 마지막에 println을 함으로써 서버에게 데이터를 요청한다.
     client.println();
