@@ -22,6 +22,9 @@ router.post('/arduino', (req, res) => {
     ],
     distance : 2.5
   }; 
+  console.log(req.body);
+  console.log(req.params);
+  console.log(req.param);
   
   // json으로 응답
   res.json(data);
