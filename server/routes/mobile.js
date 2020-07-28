@@ -15,15 +15,18 @@ router.post('/login', (req, res) => {
     
     // DB 검사 => 요청 아이디와 패스워드가 일치하는 데이터를 찾아 검사한다.
     db.query(`SELECT * FROM users WHERE id LIKE ?`, [user.id], (err, userDB) => {
+        // 에러시 실행
         if (err) {
             console.log(err);
             res.json( { success : false } );
         }
-        console.log(userDB[0].id, userDB[0].passwd);
-
+        
+        // 아이디와 패스워드 비교
         if (userDB != false && userDB[0].id == user.id && userDB[0].passwd == user.passwd)
+            // 아이디 패스워드 일치시 True 응답
             res.json( { success : true } );
         else 
+            // 일치하지 않으면 False 응답
             res.json( { success : false } );
 
     });
