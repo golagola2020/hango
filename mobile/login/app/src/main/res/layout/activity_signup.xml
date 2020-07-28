@@ -24,7 +24,7 @@
         android:typeface="normal" />
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/et_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -37,7 +37,7 @@
         android:typeface="monospace" />
 
     <EditText
-        android:id="@+id/userId"
+        android:id="@+id/et_user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -51,7 +51,7 @@
         android:typeface="monospace" />
 
     <EditText
-        android:id="@+id/userPasswd"
+        android:id="@+id/et_user_passwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -65,7 +65,7 @@
         android:typeface="monospace" />
 
     <EditText
-        android:id="@+id/userPasswdCheck"
+        android:id="@+id/et_user_passwd_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -79,7 +79,7 @@
         android:typeface="monospace" />
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/btn_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"

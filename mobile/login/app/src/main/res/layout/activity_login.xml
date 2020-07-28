@@ -24,7 +24,7 @@
         android:typeface="normal" />
 
     <EditText
-        android:id="@+id/userId"
+        android:id="@+id/et_user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
@@ -37,7 +37,7 @@
         android:typeface="monospace" />
 
     <EditText
-        android:id="@+id/userPasswd"
+        android:id="@+id/et_user_passwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
@@ -52,7 +52,7 @@
         android:typeface="monospace" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
@@ -67,7 +67,7 @@
         android:typeface="monospace" />
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/btn_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"

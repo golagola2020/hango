@@ -1,5 +1,7 @@
 package com.example.loginactivity;
 
+import android.widget.EditText;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
@@ -13,7 +15,7 @@ public class LoginRequest extends StringRequest {
     final static private String URL = "http://192.168.0.14:80/mobile/login";
     private Map<String, String> map;
 
-    public LoginRequest(String userId, String userPasswd, String userName, Response.Listener<String> listener) {
+    public LoginRequest(String userId, String userPasswd, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
