@@ -7,33 +7,46 @@ const express = require('express'),
 
 // 로그인 요청 및 응답
 router.post('/login', (req, res) => {
-  
+    // 모바일 요청 데이터
+    const user = {
+        id : req.body.userId,
+        passwd : req.body.userPasswd
+    };
+    
+    // DB 검사 => 요청 아이디와 패스워드가 일치하는 데이터를 찾아 검사한다.
+    db.query(`SELECT * FROM users WHERE id LIKE ?`, [user.id], (err, userDB) => {
+        if (err) {
+            console.log(err);
+            res.json( { success : false } );
+        }
+        console.log(userDB[0].id, userDB[0].passwd);
+
+        if (userDB != false && userDB[0].id == user.id && userDB[0].passwd == user.passwd)
+            res.json( { success : true } );
+        else 
+            res.json( { success : false } );
+
+    });
 });
 
 // 회원가입 요청 및 응답
 router.post('/signup', (req, res) => {
-    console.log(req.body);
+    // 모바일 요청 데이터
     const user = {
-            userName : req.body.userName,
-            userId : req.body.userId,
-            userPasswd : req.body.userPasswd
+            name : req.body.userName,
+            id : req.body.userId,
+            passwd : req.body.userPasswd
         };
 
-    db.query(`INSERT INTO users(name, id, passwd) values('${user.userName}', '${user.userId}', '${user.userPasswd}')`), (err, result) => {
-        // if (err) {
-        //     console.log(err);
-        //     res.json( { success : false } );
-        // }
-        console.log(result);
+    // DB 등록
+    db.query(`INSERT INTO users(name, id, passwd) VALUES('${user.name}', '${user.id}', '${user.passwd}')`, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json( { success : false } );
+        }
+        // 성공시 True 응답
         res.json( {success : true} );
-    }
-    // res.json( {success : true} )
-});
-
-router.get('/', (req, res) => {
-    console.log(req.body);
-    console.log(req.params);
-    res.send("good");
+    });
 });
 
 // 모듈 내보내기
