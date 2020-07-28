@@ -47,6 +47,16 @@ public class SignupActivity extends AppCompatActivity {
                 String userPasswd = et_user_passwd.getText().toString();
                 String userPasswdCheck = et_user_passwd_check.getText().toString();
 
+                // 입력된 데이터 검사
+                if (userName.length() == 0 || userId.length() == 0 || userPasswd.length() == 0 || userPasswdCheck.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "모든 정보는 필수 입력 사항입니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (userPasswd != userPasswdCheck) {
+                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // 리스너 생성
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override

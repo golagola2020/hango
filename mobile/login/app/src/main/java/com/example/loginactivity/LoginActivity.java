@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             // 회원 정보 등록에 성공시 실행
                             if (success) {
-                                Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                                 startActivity(intent);
                             } else {
