@@ -61,10 +61,11 @@ public class SignupActivity extends AppCompatActivity {
                                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getApplicationContext(), "등록에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         } catch (JSONException e) {
+                            Toast.makeText(getApplicationContext(), "등록에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }

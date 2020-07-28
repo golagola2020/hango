@@ -47,7 +47,7 @@
         android:ems="10"
         android:fontFamily="sans-serif-condensed-light"
         android:hint="비밀번호"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textPassword"
         android:textSize="20sp"
         android:typeface="monospace" />
 
