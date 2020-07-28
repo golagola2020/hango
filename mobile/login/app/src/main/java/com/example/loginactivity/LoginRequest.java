@@ -7,19 +7,18 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignupRequest extends StringRequest {
+public class LoginRequest extends StringRequest {
 
     // 서버 URL 설정
-    final static private String URL = "https://";
+    final static private String URL = "http://192.168.0.14:80/mobile/login";
     private Map<String, String> map;
 
-    public SignupRequest(String userId, String userPassword, String userName, Response.Listener<String> listener) {
+    public LoginRequest(String userId, String userPasswd, String userName, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-        map.put("userName", userName);
         map.put("userId", userId);
-        map.put("userPassword", userPassword);
+        map.put("userPasswd", userPasswd);
     }
 
     @Override

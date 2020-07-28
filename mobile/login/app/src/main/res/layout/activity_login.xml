@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F1F1F1"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <TextView
         android:id="@+id/logoText"
@@ -15,8 +15,8 @@
         android:layout_marginBottom="30sp"
         android:background="#353535"
         android:fontFamily="@font/aguafina_script"
-        android:paddingTop="20sp"
-        android:paddingBottom="20sp"
+        android:paddingTop="50sp"
+        android:paddingBottom="50sp"
         android:text="Hango"
         android:textAlignment="center"
         android:textColor="#ECE07C"
@@ -24,7 +24,7 @@
         android:typeface="normal" />
 
     <EditText
-        android:id="@+id/managerId"
+        android:id="@+id/userId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
@@ -37,7 +37,7 @@
         android:typeface="monospace" />
 
     <EditText
-        android:id="@+id/managerPasswd"
+        android:id="@+id/userPasswd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
@@ -67,7 +67,7 @@
         android:typeface="monospace" />
 
     <Button
-        android:id="@+id/signUp"
+        android:id="@+id/signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
