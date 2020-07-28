@@ -52,7 +52,7 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "모든 정보는 필수 입력 사항입니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (userPasswd != userPasswdCheck) {
+                if (!userPasswd.equals(userPasswdCheck)) {
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
