@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));     // body-parser의 기본
 
 // 라우팅
 app.use('/', require('./routes/home'));
+app.use('/arduino', require('./routes/arduino'));
 
 // 서버 오픈
 app.listen(PORT, () => console.log(`서버가 ${PORT} 포트에서 정상 가동되었습니다.`));
