@@ -12,7 +12,7 @@ import java.util.Map;
 public class SignupRequest extends StringRequest {
 
     // 서버 URL 설정
-    final static private String URL = "http://192.168.0.14:80/mobile/signup";
+    final static private String URL = "http://ec2-3-34-207-199.ap-northeast-2.compute.amazonaws.com/mobile/signup";
     private Map<String, String> map;
 
     public SignupRequest(String userName, String userId, String userPasswd, Response.Listener<String> listener) {
