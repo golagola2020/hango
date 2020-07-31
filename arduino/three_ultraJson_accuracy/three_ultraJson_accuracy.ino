@@ -90,6 +90,9 @@ void loop() {
     Serial.println("");
 
     multi_chosen_check(3); //3 : chosen number의 크기, 음료가 복수선택이 되었는지 보여주는 함수(오류체크)
+
+    chosen_drink_Json(chosen_number[0],chosen_number[1],chosen_number[2]);
+    Serial.println("");
   }
   for (int c = 0; c<3; c++){
     chosen_number[c] = 0; //다음 음료 선택을 위해 초기화.
