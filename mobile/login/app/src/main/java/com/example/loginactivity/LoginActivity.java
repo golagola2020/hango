@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // EditText에 입력된 값 가져오기
-                String userId = et_user_id.getText().toString();
+                final String userId = et_user_id.getText().toString();
                 String userPasswd = et_user_passwd.getText().toString();
 
                 // 리스너 생성
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (success) {
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("userId", userId);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
