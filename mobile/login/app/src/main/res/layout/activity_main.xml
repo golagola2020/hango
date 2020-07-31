@@ -29,15 +29,39 @@
         android:layout_margin="12dp"
         android:padding="6dp"
         android:background="@drawable/btn_radius" >
+
+        <TextView
+            android:id="@+id/nametext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop = "10sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
-            android:layout_marginTop = "30sp"
-            android:layout_marginBottom="30sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="홍길동님\n환영합니다.\n보유 자판기수 4대" />
+            android:text="환영합니다" />
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/vending_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"/>
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:text="로그아웃"
+                android:layout_gravity="right"/>
+        </GridLayout>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
