@@ -10,6 +10,17 @@ void ultra_Json(float distance1, float distance2, float distance3) { //Json방�
   serializeJsonPretty(doc, Serial);
 }
 
+void chosen_drink_Json(int num1, int num2, int num3) {
+  StaticJsonDocument<200> doc;
+  JsonArray chosen_drink = doc.createNestedArray("chosen drink");
+  chosen_drink.add(num1);
+  chosen_drink.add(num2);
+  chosen_drink.add(num3);
+
+  Serial.println();
+  serializeJsonPretty(doc, Serial);
+}
+
 
 void accuracy(float distance, int i){ //손의 위치를 카운트 하는 함수
   if(distance<=32 && distance >=0){
