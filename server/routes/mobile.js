@@ -22,7 +22,7 @@ router.post('/login', (req, res) => {
         }
         
         // 아이디와 패스워드 비교
-        if (userDB != false && userDB[0].id == user.id && userDB[0].passwd == user.passwd)
+        if (userDB != false && userDB[0].user_id == user.id && userDB[0].user_passwd == user.passwd)
             // 아이디 패스워드 일치시 True 응답
             res.json( { success : true } );
         else 
@@ -42,7 +42,7 @@ router.post('/signup', (req, res) => {
         };
 
     // DB 등록
-    db.query(`INSERT INTO users(name, id, passwd) VALUES('${user.name}', '${user.id}', '${user.passwd}')`, (err, result) => {
+    db.query(`INSERT INTO users(user_name, user_id, user_passwd, in_date) VALUES('${user.name}', '${user.id}', '${user.passwd}', NOW())`, (err, result) => {
         if (err) {
             console.log(err);
             res.json( { success : false } );
