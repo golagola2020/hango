@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 
   // 클라이언트가 전송한 url의 파라미터를 파싱하여 데이터를 처리하는 부분
   const receivedData = req.body;
-  console.log(`관리자 : ${receivedData.managerID}`);
+  console.log(`관리자 : ${receivedData.userId}`);
   console.log(`고유번호 : ${receivedData.serialNumber}`);
 
   // json으로 응답

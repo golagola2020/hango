@@ -60,7 +60,7 @@ void requestHttp() {
   String contentType = "application/json";      // 요청 유형
 
   // 서버의 BODY로 전송할 데이터 정의
-  json["managerID"] = "parkwoorim";
+  json["userId"] = "woorim960";
   json["serialNumber"] = "00000001";
   serializeJson(json, jsonData);
 
