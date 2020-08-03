@@ -64,7 +64,7 @@
         </GridLayout>
     </LinearLayout>
     <TextView
-        android:id="@+id/btn_add_vending"
+        android:id="@+id/btn_Add_Vending"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textSize = "22sp"
