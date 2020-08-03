@@ -20,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PrintName();    //id에 해당하는 user_name 을 받아와 메인화면에 출력
+
+
+
+
+
+
+    }
+
+    public void PrintName(){
         //id에 해당하는 user_name 을 받아와 메인화면에 출력
         TextView idText = (TextView)findViewById(R.id.nametext);
         Intent intent = getIntent();
@@ -29,7 +39,5 @@ public class MainActivity extends AppCompatActivity {
         s_User_Id.setSpan(new ForegroundColorSpan(Color.parseColor("#ff7f00")), 0, UserId.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         s_User_Id.setSpan(new RelativeSizeSpan(3.0f), 0, UserId.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         idText.setText(s_User_Id);
-
-
     }
 }
